@@ -1,0 +1,39 @@
+package hr.ferit.tumiljanovic.moviesjournal
+
+import android.app.Activity
+import android.app.Application
+import android.support.v4.app.Fragment
+import dagger.android.AndroidInjector
+import dagger.android.DispatchingAndroidInjector
+import dagger.android.HasActivityInjector
+import dagger.android.support.HasSupportFragmentInjector
+import javax.inject.Inject
+
+class App : Application(), HasActivityInjector, HasSupportFragmentInjector {
+
+    @Inject
+    private var dispatchingAndroidInjector: DispatchingAndroidInjector<Activity>? = null
+
+    @Inject
+    internal var dispatchingFragmentInjector: DispatchingAndroidInjector<Fragment>? = null
+
+    companion object {
+        lateinit var instance: App
+            private set
+    }
+
+    override fun onCreate() {
+        super.onCreate()
+
+        instance = this
+
+    }
+
+    override fun activityInjector(): AndroidInjector<Activity>? {
+       return dispatchingAndroidInjector
+    }
+
+    override fun supportFragmentInjector(): DispatchingAndroidInjector<Fragment>? {
+        return dispatchingFragmentInjector
+    }
+}
