@@ -7,15 +7,21 @@ import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
 import dagger.android.support.HasSupportFragmentInjector
+import hr.ferit.tumiljanovic.moviesjournal.di.AppComponent
+import hr.ferit.tumiljanovic.moviesjournal.di.DaggerAppComponent
+import hr.ferit.tumiljanovic.moviesjournal.di.module.AppModule
 import javax.inject.Inject
+
 
 class App : Application(), HasActivityInjector, HasSupportFragmentInjector {
 
     @Inject
-    private var dispatchingAndroidInjector: DispatchingAndroidInjector<Activity>? = null
+    lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Activity>
 
     @Inject
-    internal var dispatchingFragmentInjector: DispatchingAndroidInjector<Fragment>? = null
+    lateinit var dispatchingFragmentInjector: DispatchingAndroidInjector<Fragment>
+
+    lateinit var appComponent: AppComponent
 
     companion object {
         lateinit var instance: App
@@ -25,12 +31,15 @@ class App : Application(), HasActivityInjector, HasSupportFragmentInjector {
     override fun onCreate() {
         super.onCreate()
 
+        appComponent = DaggerAppComponent.builder().build()
+        appComponent.inject(this)
+
         instance = this
 
     }
 
     override fun activityInjector(): AndroidInjector<Activity>? {
-       return dispatchingAndroidInjector
+        return dispatchingAndroidInjector
     }
 
     override fun supportFragmentInjector(): DispatchingAndroidInjector<Fragment>? {

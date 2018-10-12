@@ -1,4 +1,4 @@
-package hr.ferit.tumiljanovic.moviesjournal.di.modules
+package hr.ferit.tumiljanovic.moviesjournal.di.module
 
 import dagger.Module
 

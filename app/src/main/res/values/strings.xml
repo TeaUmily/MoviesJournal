@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">Movies journal</string>
+    <string name="upcoming_movies_tab">Upcoming</string>
+    <string name="top_movies_tab">Top rated</string>
+    <string name="popular_tab">Popular</string>
 </resources>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <item
+        android:id="@+id/topRatedMovies"
+        android:icon="@drawable/ic_top_rated"
+        android:orderInCategory="2"
+        android:title="@string/top_movies_tab" />
+
+    <item
+        android:id="@+id/popularMovies"
+        android:icon="@drawable/ic_popular"
+        android:orderInCategory="3"
+        android:title="@string/popular_tab" />
+
+    <item
+        android:id="@+id/upcomingMovies"
+        android:icon="@drawable/ic_upcoming"
+        android:orderInCategory="1"
+        android:title="@string/upcoming_movies_tab" />
+
+
+</menu>
