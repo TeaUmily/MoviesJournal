@@ -9,7 +9,6 @@ import dagger.android.HasActivityInjector
 import dagger.android.support.HasSupportFragmentInjector
 import hr.ferit.tumiljanovic.moviesjournal.di.AppComponent
 import hr.ferit.tumiljanovic.moviesjournal.di.DaggerAppComponent
-import hr.ferit.tumiljanovic.moviesjournal.di.module.AppModule
 import javax.inject.Inject
 
 
@@ -42,7 +41,7 @@ class App : Application(), HasActivityInjector, HasSupportFragmentInjector {
         return dispatchingAndroidInjector
     }
 
-    override fun supportFragmentInjector(): DispatchingAndroidInjector<Fragment>? {
+    override fun supportFragmentInjector(): AndroidInjector<Fragment>? {
         return dispatchingFragmentInjector
     }
 }

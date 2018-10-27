@@ -14,5 +14,4 @@ abstract class ActivityModule {
     @ContributesAndroidInjector(modules = arrayOf(HomeActivityModule::class))
     abstract fun provideHomeActivity(): HomeActivity
 
-
 }

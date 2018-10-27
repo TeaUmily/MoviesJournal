@@ -8,13 +8,13 @@ data class Movie(var budget: Float,
                  @SerializedName("backdrop_path") var image: String?,
                  var genres: List<Genres>?,
                  var title: String?,
-                 @SerializedName("vote_count") var numberOdVotes: Int,
+                 @SerializedName("vote_count") var numberOfVotes: Int,
                  var id: String,
-                 @SerializedName("release_date")
-                 var releaseDate: String?,
+                 @SerializedName("release_date") var releaseDate: String?,
                  var type: String?,
                  var tagline: String?,
                  var overview: String?,
                  var runtime: String?
 
 )
+

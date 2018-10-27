@@ -28,7 +28,7 @@ open class BaseInteractor {
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
-    internal fun dispose() {
+    fun dispose() {
         disposableObserver.dispose()
     }
 

@@ -2,17 +2,17 @@ package hr.ferit.tumiljanovic.moviesjournal.utils
 
 object Constants {
 
-    val API_KEY: String = "028a45612271cb6d0a2474982ab485f2"
+    const val API_KEY = "028a45612271cb6d0a2474982ab485f2"
 
-    val LANGUAGE: String = "en-US"
+    const val LANGUAGE = "en-US"
 
-    val PAGE: String = "1"
+    const val PAGE = "1"
 
-    val TYPE_POPULAR  = "popular"
+    const val TYPE_POPULAR = "popular"
 
-    val TYPE_UPCOMING: String = "upcoming"
+    const val TYPE_UPCOMING = "upcoming"
 
-    val TYPE_TOP_RATED :String = "top rated"
+    const val TYPE_TOP_RATED = "top rated"
 
 
 }

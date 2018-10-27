@@ -8,6 +8,7 @@ import dagger.android.support.AndroidSupportInjectionModule
 import hr.ferit.tumiljanovic.moviesjournal.App
 import hr.ferit.tumiljanovic.moviesjournal.di.module.ActivityModule
 import hr.ferit.tumiljanovic.moviesjournal.di.module.AppModule
+import hr.ferit.tumiljanovic.moviesjournal.di.module.FragmentModule
 import hr.ferit.tumiljanovic.moviesjournal.ui.home.di.HomeActivityModule
 import javax.inject.Singleton
 
@@ -16,9 +17,10 @@ import javax.inject.Singleton
     (AndroidSupportInjectionModule::class),
     (HomeActivityModule::class),
     (AppModule::class),
-    (ActivityModule::class)])
+    (ActivityModule::class),
+    (FragmentModule::class)])
 
 interface AppComponent : AndroidInjector<Application> {
-    fun inject(application: App)
+    fun inject(app: App)
 
 }
