@@ -12,7 +12,7 @@ import hr.ferit.tumiljanovic.moviesjournal.di.DaggerAppComponent
 import javax.inject.Inject
 
 
-class App : Application(), HasActivityInjector, HasSupportFragmentInjector {
+class App @Inject constructor() : Application(), HasActivityInjector, HasSupportFragmentInjector {
 
     @Inject
     lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Activity>

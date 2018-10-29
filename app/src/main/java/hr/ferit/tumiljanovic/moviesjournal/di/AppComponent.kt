@@ -9,6 +9,7 @@ import hr.ferit.tumiljanovic.moviesjournal.App
 import hr.ferit.tumiljanovic.moviesjournal.di.module.ActivityModule
 import hr.ferit.tumiljanovic.moviesjournal.di.module.AppModule
 import hr.ferit.tumiljanovic.moviesjournal.di.module.FragmentModule
+import hr.ferit.tumiljanovic.moviesjournal.di.module.ServiceModule
 import hr.ferit.tumiljanovic.moviesjournal.ui.home.di.HomeActivityModule
 import javax.inject.Singleton
 
@@ -17,6 +18,7 @@ import javax.inject.Singleton
     (AndroidSupportInjectionModule::class),
     (HomeActivityModule::class),
     (AppModule::class),
+    (ServiceModule::class),
     (ActivityModule::class),
     (FragmentModule::class)])
 

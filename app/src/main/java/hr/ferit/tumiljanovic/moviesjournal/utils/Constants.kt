@@ -14,5 +14,9 @@ object Constants {
 
     const val TYPE_TOP_RATED = "top rated"
 
+    const val IMAGE_BASE_URL = "http://image.tmdb.org/t/p/original"
+
+    const val POSITION = "position"
+
 
 }

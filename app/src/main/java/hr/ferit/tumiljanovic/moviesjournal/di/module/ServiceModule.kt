@@ -13,10 +13,11 @@ import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
 @Module
-public class ServiceModule {
+class ServiceModule {
 
-    private val BASE_URL = "http://api.themoviedb.org/"
-
+    companion object {
+        const val BASE_URL = "https://api.themoviedb.org"
+    }
 
     @Singleton
     @Provides
@@ -26,14 +27,18 @@ public class ServiceModule {
 
     @Singleton
     @Provides
-    fun retrofit(okHttpClient: OkHttpClient, gson: Gson): Retrofit {
+    fun retrofit(okHttpClient: OkHttpClient, gsonConverterFactory: GsonConverterFactory): Retrofit {
         return Retrofit.Builder()
                 .baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create(gson))
+                .addConverterFactory(gsonConverterFactory)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(okHttpClient)
                 .build()
     }
+
+    @Singleton
+    @Provides
+    fun gsonConverterFactory(): GsonConverterFactory = GsonConverterFactory.create()
 
     @Singleton
     @Provides
@@ -45,13 +50,5 @@ public class ServiceModule {
     @Provides
     fun loggingInterceptor(): HttpLoggingInterceptor {
         return HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
-    }
-
-    @Singleton
-    @Provides
-    fun gson(): Gson {
-        val gsonBuilder = GsonBuilder()
-        gsonBuilder.excludeFieldsWithoutExposeAnnotation()
-        return gsonBuilder.create()
     }
 }

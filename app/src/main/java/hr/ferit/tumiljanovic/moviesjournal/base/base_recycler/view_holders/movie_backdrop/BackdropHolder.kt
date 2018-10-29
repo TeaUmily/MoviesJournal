@@ -11,7 +11,7 @@ import hr.ferit.tumiljanovic.moviesjournal.R
 import hr.ferit.tumiljanovic.moviesjournal.base.base_recycler.RecyclerWrapper
 
 
-class BackdropHolder(itemView: View, var dataList : List<RecyclerWrapper> ) : RecyclerView.ViewHolder(itemView) {
+class BackdropHolder(itemView: View, var dataList: List<RecyclerWrapper>) : RecyclerView.ViewHolder(itemView) {
 
     @BindView(R.id.movie_backdrop)
     lateinit var backdropImage: ImageView
@@ -22,8 +22,8 @@ class BackdropHolder(itemView: View, var dataList : List<RecyclerWrapper> ) : Re
 
     fun onBind(position: Int) {
         if (position != RecyclerView.NO_POSITION) {
-         //   val data = dataList[position].data as BackdropHolderData
-            //Glide.with(backdrop.getContext()).load(data.imagePath).into(backdrop)
+            val data = dataList[position].data as BackdropHolderData
+            Glide.with(backdropImage.getContext()).load(data.imagePath).into(backdropImage)
         }
     }
 

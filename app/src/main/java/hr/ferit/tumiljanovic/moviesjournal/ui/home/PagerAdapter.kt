@@ -8,7 +8,7 @@ class PagerAdapter(fragmentManager: FragmentManager) : FragmentStatePagerAdapter
 
     var size: Int = 0
 
-    override fun getItem(position: Int) = MovieListFragment.newInstance()
+    override fun getItem(position: Int) = MovieListFragment.newInstance(position)
 
     override fun getCount() = size
 

@@ -1,9 +1,7 @@
 package hr.ferit.tumiljanovic.moviesjournal.ui.movie_list
 
 import android.os.Bundle
-import android.support.v7.widget.DefaultItemAnimator
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import android.support.v7.widget.*
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,21 +11,29 @@ import hr.ferit.tumiljanovic.moviesjournal.R
 import hr.ferit.tumiljanovic.moviesjournal.base.BaseFragment
 import hr.ferit.tumiljanovic.moviesjournal.base.base_recycler.RecyclerAdapterImpl
 import hr.ferit.tumiljanovic.moviesjournal.base.base_recycler.RecyclerWrapper
-import hr.ferit.tumiljanovic.moviesjournal.base.base_recycler.view_holders.movie_backdrop.BackdropHolderData
-import hr.ferit.tumiljanovic.moviesjournal.model.Genres
-import hr.ferit.tumiljanovic.moviesjournal.model.Movie
+import hr.ferit.tumiljanovic.moviesjournal.utils.Constants
+import hr.ferit.tumiljanovic.moviesjournal.utils.DividerItemDecorator
+
+import javax.inject.Inject
 
 
-class MovieListFragment : BaseFragment(), MovieListContract.View {
+class MovieListFragment  : BaseFragment(), MovieListContract.View {
+
 
     @BindView(R.id.recyclerView_movie_list)
     lateinit var recycler: RecyclerView
 
-    private val presenter : MovieListContract.Presenter? = null
+    @Inject
+    lateinit var  presenter : MovieListContract.Presenter
+    @Inject
+    lateinit var adapter: RecyclerAdapterImpl
 
     companion object {
-        fun newInstance(): MovieListFragment {
+        fun newInstance(position : Int): MovieListFragment {
+            var bundle : Bundle = Bundle()
+            bundle.putInt(Constants.POSITION, position)
             val fragment = MovieListFragment()
+            fragment.arguments = bundle
             return fragment
         }
     }
@@ -40,22 +46,22 @@ class MovieListFragment : BaseFragment(), MovieListContract.View {
         super.onViewCreated(view, savedInstanceState)
         ButterKnife.bind(this, view)
 
-        recycler.layoutManager = LinearLayoutManager(activity)
+        recycler.layoutManager = GridLayoutManager(context, 2)
         recycler.itemAnimator = DefaultItemAnimator()
-
-       var g1: Genres = Genres("g!", "name")
-        var geners: List<Genres> = listOf(g1)
-        var data: BackdropHolderData = BackdropHolderData("lalalala")
-        var rw1: RecyclerWrapper = RecyclerWrapper(data, RecyclerWrapper.TYPE_BACKDROP)
-        var listdata: List<RecyclerWrapper> = listOf(rw1, rw1, rw1, rw1)
-
-
-        var adapter: RecyclerAdapterImpl = RecyclerAdapterImpl(arrayListOf(), requireContext())
-
-        adapter.addItems(listdata)
+        recycler.addItemDecoration(DividerItemDecorator())
         recycler.adapter = adapter
 
+        getMovies()
 
+    }
+
+    private fun getMovies() {
+        var position: Int = this.arguments!!.getInt(Constants.POSITION)
+        presenter.getMovies(position)
+    }
+
+    override fun showMovies(dataList: MutableList<RecyclerWrapper>) {
+        adapter.addItems(dataList)
     }
 
 
