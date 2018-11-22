@@ -5,6 +5,7 @@ import android.support.v7.widget.*
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import butterknife.BindView
 import butterknife.ButterKnife
 import hr.ferit.tumiljanovic.moviesjournal.R
@@ -12,25 +13,25 @@ import hr.ferit.tumiljanovic.moviesjournal.base.BaseFragment
 import hr.ferit.tumiljanovic.moviesjournal.base.base_recycler.RecyclerAdapterImpl
 import hr.ferit.tumiljanovic.moviesjournal.base.base_recycler.RecyclerWrapper
 import hr.ferit.tumiljanovic.moviesjournal.utils.Constants
-import hr.ferit.tumiljanovic.moviesjournal.utils.DividerItemDecorator
+import hr.ferit.tumiljanovic.moviesjournal.utils.divider_item_decorator.BaseDividerItemDecorator
+import hr.ferit.tumiljanovic.moviesjournal.utils.divider_item_decorator.VerticalItemDivider
 
 import javax.inject.Inject
 
 
-class MovieListFragment  : BaseFragment(), MovieListContract.View {
-
+class MovieListFragment : BaseFragment(), MovieListContract.View{
 
     @BindView(R.id.recyclerView_movie_list)
-    lateinit var recycler: RecyclerView
+    lateinit var moviesRecyclerView: RecyclerView
 
     @Inject
-    lateinit var  presenter : MovieListContract.Presenter
+    lateinit var presenter: MovieListContract.Presenter
     @Inject
     lateinit var adapter: RecyclerAdapterImpl
 
     companion object {
-        fun newInstance(position : Int): MovieListFragment {
-            var bundle : Bundle = Bundle()
+        fun newInstance(position: Int): MovieListFragment {
+            var bundle: Bundle = Bundle()
             bundle.putInt(Constants.POSITION, position)
             val fragment = MovieListFragment()
             fragment.arguments = bundle
@@ -46,13 +47,27 @@ class MovieListFragment  : BaseFragment(), MovieListContract.View {
         super.onViewCreated(view, savedInstanceState)
         ButterKnife.bind(this, view)
 
-        recycler.layoutManager = GridLayoutManager(context, 2)
-        recycler.itemAnimator = DefaultItemAnimator()
-        recycler.addItemDecoration(DividerItemDecorator())
-        recycler.adapter = adapter
+        moviesRecyclerView.layoutManager = GridLayoutManager(context, 2)
+        moviesRecyclerView.itemAnimator = DefaultItemAnimator()
+        moviesRecyclerView.addItemDecoration(VerticalItemDivider())
+        moviesRecyclerView.adapter = adapter
 
         getMovies()
+    }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+
+        val scrollY = moviesRecyclerView.computeVerticalScrollOffset()
+
+        outState?.putInt("scrollY", scrollY)
+        super.onSaveInstanceState(outState)
+    }
+
+    override fun onViewStateRestored(savedInstanceState: Bundle?) {
+        val scrollY = savedInstanceState?.getInt("scrollY") ?: 0
+
+        moviesRecyclerView.scrollTo(0,scrollY)
+        super.onViewStateRestored(savedInstanceState)
     }
 
     private fun getMovies() {
@@ -63,6 +78,9 @@ class MovieListFragment  : BaseFragment(), MovieListContract.View {
     override fun showMovies(dataList: MutableList<RecyclerWrapper>) {
         adapter.addItems(dataList)
     }
+
+
+
 
 
 }

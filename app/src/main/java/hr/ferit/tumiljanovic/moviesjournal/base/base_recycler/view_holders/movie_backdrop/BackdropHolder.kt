@@ -16,6 +16,9 @@ class BackdropHolder(itemView: View, var dataList: List<RecyclerWrapper>) : Recy
     @BindView(R.id.movie_backdrop)
     lateinit var backdropImage: ImageView
 
+    @BindView(R.id.tagline)
+    lateinit var movieTagline : TextView
+
     init {
         ButterKnife.bind(this, itemView)
     }
@@ -24,6 +27,7 @@ class BackdropHolder(itemView: View, var dataList: List<RecyclerWrapper>) : Recy
         if (position != RecyclerView.NO_POSITION) {
             val data = dataList[position].data as BackdropHolderData
             Glide.with(backdropImage.getContext()).load(data.imagePath).into(backdropImage)
+            movieTagline.text = data.movieTagline
         }
     }
 

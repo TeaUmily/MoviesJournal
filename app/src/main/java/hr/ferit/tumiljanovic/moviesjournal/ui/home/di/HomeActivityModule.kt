@@ -11,8 +11,7 @@ class HomeActivityModule {
     
     @PerActivity
     @Provides
-    fun provideHomeView(homeActivity: HomeActivity): HomeActivity {
-        return homeActivity
-    }
+    fun provideHomeView(homeActivity: HomeActivity): HomeActivity = homeActivity
+
 
 }

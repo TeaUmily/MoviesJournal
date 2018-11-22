@@ -4,6 +4,7 @@ import hr.ferit.tumiljanovic.moviesjournal.model.Movie
 import hr.ferit.tumiljanovic.moviesjournal.model.MovieList
 import io.reactivex.Observable
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface ApiService {
@@ -25,4 +26,11 @@ interface ApiService {
                           @Query("language") language: String,
                           @Query("page") list: String):
             Observable<MovieList>
+
+    @GET("/3/movie/{id}")
+    fun getMovieDetails(@Path("id") id: Int, @Query("api_key") apiKey: String,
+                        @Query("language") language: String):
+            Observable<Movie>
+
+
 }

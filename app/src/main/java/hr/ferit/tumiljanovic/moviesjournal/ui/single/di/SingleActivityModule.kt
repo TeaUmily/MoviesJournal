@@ -1,11 +1,12 @@
-package hr.ferit.tumiljanovic.moviesjournal.ui.movie_list.di
+package hr.ferit.tumiljanovic.moviesjournal.ui.single.di
 
-import android.support.v4.app.FragmentManager
 import dagger.Module
 import dagger.Provides
 import hr.ferit.tumiljanovic.moviesjournal.base.base_recycler.RecyclerAdapter
 import hr.ferit.tumiljanovic.moviesjournal.base.base_recycler.RecyclerAdapterImpl
 import hr.ferit.tumiljanovic.moviesjournal.base.base_recycler.view_holders.movie_genres.GenresRecyclerAdapter
+import hr.ferit.tumiljanovic.moviesjournal.interaction.MovieInteractor
+import hr.ferit.tumiljanovic.moviesjournal.interaction.MovieInteractorImpl
 import hr.ferit.tumiljanovic.moviesjournal.interaction.MovieListInteractor
 import hr.ferit.tumiljanovic.moviesjournal.interaction.MovieListInteractorImpl
 import hr.ferit.tumiljanovic.moviesjournal.scopes.PerActivity
@@ -13,37 +14,26 @@ import hr.ferit.tumiljanovic.moviesjournal.scopes.PerFragment
 import hr.ferit.tumiljanovic.moviesjournal.ui.movie_list.MovieListContract
 import hr.ferit.tumiljanovic.moviesjournal.ui.movie_list.MovieListFragment
 import hr.ferit.tumiljanovic.moviesjournal.ui.movie_list.MovieListPresenter
-
+import hr.ferit.tumiljanovic.moviesjournal.ui.single.SingleActivity
+import hr.ferit.tumiljanovic.moviesjournal.ui.single.SingleActivityContract
+import hr.ferit.tumiljanovic.moviesjournal.ui.single.SinglePresenter
 
 @Module
-class MovieListFragmentModule {
+class SingleActivityModule {
 
-    @PerFragment
+    @PerActivity
     @Provides
-    fun provideRecyclerAdapter(adapter: RecyclerAdapterImpl): RecyclerAdapter = adapter
+    fun provideSingleActivityView(singleActivity: SingleActivity): SingleActivityContract.View = singleActivity
 
-    @PerFragment
+    @PerActivity
     @Provides
-    fun provideRecyclerAdapterImpl(): RecyclerAdapterImpl = RecyclerAdapterImpl()
-
-
-    @PerFragment
-    @Provides
-    fun provideMovieListView(fragment: MovieListFragment): MovieListContract.View = fragment
-
-    @PerFragment
-    @Provides
-    fun provideMovieListInteractor(interactor: MovieListInteractorImpl, fragment: MovieListFragment): MovieListInteractor {
+    fun provideMovieInteractor(interactor: MovieInteractorImpl): MovieInteractor {
         // fragment.getLifecycle().addObserver(interactor)
         return interactor
     }
 
-    @PerFragment
+    @PerActivity
     @Provides
-    fun provideMovieListPresenter(presenter: MovieListPresenter): MovieListContract.Presenter = presenter
-
-    @PerFragment
-    @Provides
-    fun provideFragmentManager(fragment: MovieListFragment): FragmentManager = fragment.childFragmentManager
+    fun provideSinglePresenter(presenter: SinglePresenter): SingleActivityContract.Presenter = presenter
 
 }

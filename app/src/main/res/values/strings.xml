@@ -3,4 +3,12 @@
     <string name="upcoming_movies_tab">Upcoming</string>
     <string name="top_movies_tab">Top rated</string>
     <string name="popular_tab">Popular</string>
+    <string name="storyline">STORYLINE</string>
+    <string name="about_film">ABOUT FILM</string>
+    <string name="release_date">Release Date:</string>
+    <string name="language">Language:</string>
+    <string name="countries">Countries:</string>
+    <string name="companies">Companies:</string>
+    <string name="homepage">Homepage:</string>
+    <string name="budget">Budget:</string>
 </resources>

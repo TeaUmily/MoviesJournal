@@ -1,8 +1,7 @@
 package hr.ferit.tumiljanovic.moviesjournal.ui.movie_list
 
-import android.util.Log
+
 import hr.ferit.tumiljanovic.moviesjournal.base.base_recycler.RecyclerWrapper
-import hr.ferit.tumiljanovic.moviesjournal.base.base_recycler.view_holders.movie_backdrop.BackdropHolderData
 import hr.ferit.tumiljanovic.moviesjournal.base.base_recycler.view_holders.movie_poster.PosterHolderData
 import hr.ferit.tumiljanovic.moviesjournal.interaction.InteractorWrapper
 import hr.ferit.tumiljanovic.moviesjournal.interaction.MovieListInteractor
